@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery.js"></script>
+	<script>
+	$(function(){
+		var index;
+		$(".bg-box").on("mousedown",false);
+		$(".imgs li").on("click",function(){
+			$(".infos").css("display","block");
+			$(".infos #img").attr("src",$(this).find("img").attr("src"))
+			index=$(this).index();
+		})
+		$(".infos .close").on("mousedown",function(){
+			$(".infos").css("display","none");
+		})
+		$(".infos .mask").on("click",function(){
+			$(".infos .close").trigger("mousedown");
+		})
+		$(".infos #img").on("click",function(e){
+			var w=$(window).outerWidth();
+			var ew=e.pageX;
+			if(ew>w/2){
+				$(".infos .btnr").trigger("click");
+			}else{
+				$(".infos .btnl").trigger("click");
+			}
+		})
+		$(".infos .btnr").on("click",function(){
+			index++;
+			if(index>7){
+				index=0;
+			}
+			$(".infos #img").attr("src",$(".img-box .imgs li img").eq(index).attr("src"))
+		})
+		$(".infos .btnl").on("click",function(){
+			index--;
+			if(index<0){
+				index=7;
+			}
+			$(".infos #img").attr("src",$(".img-box .imgs li img").eq(index).attr("src"))
+		})
+	})
+	</script>
+</head>
+<style>
+	*{
+		margin:0;
+		padding:0;
+		list-style: none;
+		text-decoration: none;
+	}
+	.bg-box{
+		position: fixed;
+		top:0;
+		left:0;
+		right:0;
+		bottom:0;
+		margin:auto;
+		background: url(./images/bg.jpg) center center no-repeat #010103;
+	}
+	.img-box{
+		width:824px;
+		height:406px;
+		position: absolute;
+		top:0;
+		left:0;
+		right:0;
+		bottom:0;
+		margin:auto;
+	}
+	.img-box .imgs{
+		width:824px;
+		height:412px;
+		/*border:1px solid red;*/
+	}
+	.img-box .imgs li{
+		float: left;
+		width:200px;
+		height:197px;
+		/*border:1px solid red;*/
+		margin:2px;
+	}
+	.img-box .imgs li a{
+		width:200px;
+		height:197px;
+	}
+	.img-box .imgs li a img{
+		width:200px;
+	}
+	.infos{
+		position: absolute;
+		top:0;
+		left:0;
+		right:0;
+		bottom: 0;
+		margin:auto;
+		display: none;
+	}
+	.infos .mask{
+		background:rgba(0,0,0,0.7);
+		position: absolute;
+		top:0;
+		left:0;
+		right:0;
+		bottom: 0;
+		margin:auto;
+	}
+	.infos img{
+		position: absolute;
+		top:0;
+		left:0;
+		right:0;
+		bottom:0;
+		margin:auto;
+		max-width:100%;
+		max-height:100%;
+		z-index: 5;
+	}
+	.infos .btns{
+		width:100%;
+		height:0;
+		position: absolute;
+		top:50%;
+		margin-top: -40px;
+		z-index: 2;
+	}
+	.infos .btns a{
+		width:50px;
+		height:80px;
+		font-size: 42px;
+		color:#ccc;
+	}
+	.infos .btns a.btnr{
+		float: right;
+	}
+	.infos .close{
+		width:60px;
+		height:60px;
+		font-size: 34px;
+		/*background: red;*/
+		position: absolute;
+		top:30px;
+		right:30px;
+		text-align: center;
+		line-height: 60px;
+		cursor: pointer;
+		z-index: 5;
+	}
+</style>
+<body>
+	<div class="bg-box">
+		<div class="img-box">
+			<ul class="imgs">
+				<li><a href="javascript:;"><img src="./images/1.jpg" alt=""></a></li>
+				<li><a href="javascript:;"><img src="./images/2.jpg" alt=""></a></li>
+				<li><a href="javascript:;"><img src="./images/3.jpg" alt=""></a></li>
+				<li><a href="javascript:;"><img src="./images/4.jpg" alt=""></a></li>
+				<li><a href="javascript:;"><img src="./images/5.jpg" alt=""></a></li>
+				<li><a href="javascript:;"><img src="./images/6.jpg" alt=""></a></li>
+				<li><a href="javascript:;"><img src="./images/7.jpg" alt=""></a></li>
+				<li><a href="javascript:;"><img src="./images/8.jpg" alt=""></a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="infos">
+		<img id="img" alt="">
+		<div class="btns">
+			<a href="javascript:;" class="btnl">&lt;</a>
+			<a href="javascript:;" class="btnr">&gt;</a>
+		</div>
+		<div class="close"><img src="./images/guanbi.jpg" style="width:60px" alt=""></div>
+		<div class="mask"></div>
+	</div>
+</body>
+</html>
